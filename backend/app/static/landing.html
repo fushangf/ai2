@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="AI Voice Draw：纯语音控制、三秒静默提交、AI 动态规划与安全 Drawing DSL。" />
+  <title>AI Voice Draw · 纯语音智能绘图平台</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body class="marketing-body">
+  <header class="marketing-nav">
+    <a class="brand-lockup" href="/" aria-label="AI Voice Draw 首页">
+      <span class="brand-mark"><i></i></span>
+      <span><strong>AI Voice Draw</strong><small>纯语音智能绘图</small></span>
+    </a>
+    <nav class="marketing-links" aria-label="主导航">
+      <a href="#features">核心能力</a>
+      <a href="#architecture">技术架构</a>
+      <a href="#workflow">使用流程</a>
+    </nav>
+    <div class="marketing-actions">
+      <a class="button button-ghost" href="/login">登录</a>
+      <a class="button button-primary" href="/register">免费注册</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="marketing-hero">
+      <div class="hero-glow hero-glow-one"></div><div class="hero-glow hero-glow-two"></div>
+      <div class="marketing-hero-copy">
+        <span class="product-pill"><i></i> AI + Voice + Drawing DSL</span>
+        <h1>不用鼠标和键盘，<br /><span>用声音完成整幅创作。</span></h1>
+        <p>从语音理解、复杂任务拆解到安全画布执行，AI Voice Draw 为绘画创作提供真正的纯语音闭环。自然描述，静默三秒，画面即刻生成。</p>
+        <div class="hero-buttons">
+          <a class="button button-primary button-large" href="/login">开始语音创作 <span>→</span></a>
+          <a class="button button-ghost button-large" href="#architecture">查看技术架构</a>
+        </div>
+        <div class="trust-row">
+          <span>✓ 三秒静默自动提交</span><span>✓ 毫秒级本地编辑</span><span>✓ 可中断与自动回滚</span>
+        </div>
+      </div>
+      <div class="product-preview" aria-label="产品界面预览">
+        <div class="preview-top"><span></span><span></span><span></span><b>AI Voice Draw Workspace</b></div>
+        <div class="preview-body">
+          <div class="preview-sidebar">
+            <div class="preview-logo"></div><i></i><i></i><i></i><i></i>
+          </div>
+          <div class="preview-stage">
+            <div class="preview-status"><span class="live-dot"></span> 正在聆听 · 静默倒计时 2.4s</div>
+            <div class="preview-canvas">
+              <div class="preview-moon"></div><div class="preview-sea"></div><div class="preview-lighthouse"></div>
+              <div class="preview-wave one"></div><div class="preview-wave two"></div>
+            </div>
+            <div class="preview-command">“画一幅夜晚海边，远处有灯塔……”</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="metric-strip">
+      <article><strong>3 秒</strong><span>自适应静默判定</span></article>
+      <article><strong>&lt;1 ms</strong><span>本地指令路由</span></article>
+      <article><strong>220</strong><span>单次最大 DSL 操作</span></article>
+      <article><strong>2 种</strong><span>绘图与语音交流模式</span></article>
+    </section>
+
+    <section class="marketing-section" id="features">
+      <div class="section-heading"><span>CORE CAPABILITIES</span><h2>不是“语音按钮”，而是完整的语音创作系统</h2><p>围绕准确性、响应速度、复杂指令和现场稳定性构建。</p></div>
+      <div class="feature-grid">
+        <article class="feature-card featured"><div class="feature-icon">◉</div><h3>纯语音创作闭环</h3><p>说“开始”进入描述，系统通过 VAD 判断语音活动，连续静默三秒自动提交。绘制、编辑、中断、保存和恢复均可语音完成。</p><span>VOICE FIRST</span></article>
+        <article class="feature-card"><div class="feature-icon">⚡</div><h3>双路由低延迟</h3><p>移动、缩放、旋转、变色和删除走本地快速通道；复杂场景和多对象关系交由 AI 规划。</p><span>LOCAL + AI</span></article>
+        <article class="feature-card"><div class="feature-icon">◇</div><h3>安全 Drawing DSL</h3><p>模型不直接输出可执行代码，而是生成结构化图元计划，经 Pydantic 和 Guardrails 校验后执行。</p><span>SAFE BY DESIGN</span></article>
+        <article class="feature-card"><div class="feature-icon">↺</div><h3>可中断事务执行</h3><p>规划和逐步绘制期间可随时说“停止”。超时、网络异常或 DSL 执行失败都会回滚到任务开始前。</p><span>TRANSACTIONAL</span></article>
+        <article class="feature-card"><div class="feature-icon">◎</div><h3>精准对象消歧</h3><p>支持“最左边的云”“第二个圆”“最大的太阳”等表达，通过标签、空间位置、序号和大小定位对象。</p><span>CONTEXT AWARE</span></article>
+        <article class="feature-card"><div class="feature-icon">✦</div><h3>语音交流模型 V2</h3><p>一条语音切换至交流模式，让系统基于当前画面进行讲解、总结和创作建议，并自动语音播报。</p><span>VOICE CHAT V2</span></article>
+      </div>
+    </section>
+
+    <section class="marketing-section architecture-section" id="architecture">
+      <div class="section-heading"><span>TECH ARCHITECTURE</span><h2>可解释、可验证、可扩展的执行链路</h2></div>
+      <div class="architecture-flow">
+        <article><b>01</b><div class="arch-icon">◉</div><h3>Voice + VAD</h3><p>候选重排、置信度过滤、噪声抑制与静默判定</p></article><i>→</i>
+        <article><b>02</b><div class="arch-icon">⌘</div><h3>Intent Router</h3><p>系统控制、本地编辑与复杂 AI 任务自动分流</p></article><i>→</i>
+        <article><b>03</b><div class="arch-icon">AI</div><h3>AI Planner</h3><p>拆解复杂自然语言，生成结构化 DrawingPlan</p></article><i>→</i>
+        <article><b>04</b><div class="arch-icon">{ }</div><h3>Guarded DSL</h3><p>强类型校验、坐标限制、颜色过滤与操作限额</p></article><i>→</i>
+        <article><b>05</b><div class="arch-icon">▣</div><h3>Canvas</h3><p>逐步可视化执行、中断回滚和作品持久化</p></article>
+      </div>
+    </section>
+
+    <section class="marketing-section" id="workflow">
+      <div class="section-heading"><span>VOICE WORKFLOW</span><h2>三句话完成一次完整演示</h2></div>
+      <div class="workflow-grid">
+        <article><span>1</span><h3>说“开始”</h3><p>系统进入语音记录状态，不会在待机时误调用模型。</p></article>
+        <article><span>2</span><h3>自然描述画面</h3><p>自由描述主体、布局、颜色、光影和对象关系。</p></article>
+        <article><span>3</span><h3>停顿三秒</h3><p>系统自动判定描述完成，选择本地或 AI 路由并执行。</p></article>
+      </div>
+      <div class="final-cta"><div><span>READY TO CREATE?</span><h2>让第一幅声音画作，从现在开始。</h2></div><a class="button button-primary button-large" href="/register">创建免费账号 →</a></div>
+    </section>
+  </main>
+
+  <footer class="marketing-footer"><div class="brand-lockup"><span class="brand-mark"><i></i></span><span><strong>AI Voice Draw</strong><small>Competition Edition 4.3.1</small></span></div><p>Voice → Intent → AI Plan → Drawing DSL → Canvas</p><a href="/admin/login">管理员入口</a></footer>
+  <script src="/static/landing.js"></script>
+</body>
+</html>

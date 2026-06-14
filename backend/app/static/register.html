@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>创建账号 · AI Voice Draw</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body class="portal-body register-body">
+  <a class="portal-brand" href="/"><span class="brand-mark"><i></i></span><span><strong>AI Voice Draw</strong><small>纯语音智能绘图</small></span></a>
+  <main class="register-shell">
+    <section class="register-intro">
+      <span class="product-pill"><i></i> CREATE YOUR ACCOUNT</span>
+      <h1>创建你的<br /><span>语音创作空间</span></h1>
+      <p>注册后即可使用完整的纯语音绘图、上下文编辑、作品保存和语音交流模型 V2。</p>
+      <div class="register-benefits">
+        <article><b>✓</b><div><strong>纯语音创作</strong><span>从描述到编辑，无需鼠标和键盘</span></div></article>
+        <article><b>✓</b><div><strong>作品云端管理</strong><span>保存、恢复并继续编辑历史作品</span></div></article>
+        <article><b>✓</b><div><strong>安全执行机制</strong><span>结构化 DSL 校验、限流与事务回滚</span></div></article>
+      </div>
+    </section>
+
+    <section class="portal-card register-card">
+      <div class="portal-card-header"><span>JOIN AI VOICE DRAW</span><h2>注册普通用户</h2><p>填写账号信息，开始你的第一幅声音画作</p></div>
+      <form id="registerForm" class="modern-form" autocomplete="on">
+        <div class="form-row">
+          <label><span>用户名</span><div class="input-shell"><i>◉</i><input name="username" autocomplete="username" placeholder="3–50 位字符" minlength="3" maxlength="50" required /></div></label>
+          <label><span>邮箱</span><div class="input-shell"><i>＠</i><input type="email" name="email" autocomplete="email" placeholder="you@example.com" required /></div></label>
+        </div>
+        <label><span>密码</span><div class="input-shell"><i>⌁</i><input id="registerPassword" type="password" name="password" autocomplete="new-password" placeholder="至少 8 位，建议包含字母和数字" minlength="8" required /><button class="password-toggle" type="button" data-target="registerPassword">显示</button></div></label>
+        <div class="password-strength"><span id="strengthBar"></span></div><small id="strengthText" class="field-note">密码强度：尚未输入</small>
+        <label><span>确认密码</span><div class="input-shell"><i>✓</i><input id="confirmPassword" type="password" name="confirm_password" autocomplete="new-password" placeholder="请再次输入密码" minlength="8" required /><button class="password-toggle" type="button" data-target="confirmPassword">显示</button></div></label>
+        <label class="agreement"><input type="checkbox" id="agreement" required /><span>我已阅读并同意平台使用规范与隐私说明</span></label>
+        <button class="submit-button" type="submit"><span>创建账号并进入工作台</span><b>→</b></button>
+        <p id="registerMessage" class="form-message" role="status"></p>
+      </form>
+      <div class="portal-switch">已有账号？<a href="/login">返回登录</a></div>
+    </section>
+  </main>
+  <script src="/static/register.js"></script>
+</body>
+</html>

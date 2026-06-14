@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>语音绘图工作台 · AI Voice Draw</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="hero-copy">
+        <a class="workspace-home-link" href="/">AI VOICE DRAW / HOME</a>
+        <p class="eyebrow">VOICE + VAD → LOCAL ROUTER / AI COMPILER → SAFE DSL → CANVAS</p>
+        <h1>AI 纯语音绘图工作台</h1>
+        <p class="subtitle">说“开始”后自然描述；系统使用语音活动检测持续判断是否仍在说话，连续静默 3 秒自动提交。高频编辑走本地低延迟通道，复杂创作交给 AI 拆解为可验证 Drawing DSL。</p>
+        <div class="header-badges">
+          <span class="badge badge-primary" id="providerBadge">AI 服务：检测中</span>
+          <span class="badge" id="modelBadge">模型：检测中</span>
+          <span class="badge badge-primary">唤醒词：开始</span>
+          <span class="badge badge-finish">VAD 静默结束：3 秒</span>
+          <span class="badge badge-fast">本地编辑：毫秒级</span>
+          <span class="badge badge-stop">中断词：停止</span>
+        </div>
+      </div>
+      <div class="voice-status-panel">
+        <div class="voice-orb" id="voiceOrb" aria-label="语音状态"><span></span></div>
+        <div class="voice-caption">
+          <strong id="taskStatus">初始化中</strong>
+          <small id="userIdentity">正在校验登录状态</small>
+          <div class="audio-meter" aria-label="麦克风音量"><span id="audioLevelFill"></span></div>
+          <button class="ghost-button" id="logoutButton" type="button">退出登录</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="status-grid competition-status-grid">
+      <article class="status-card">
+        <span>监听状态</span>
+        <strong id="listenStatus">正在初始化...</strong>
+      </article>
+      <article class="status-card wide">
+        <span>最近语音</span>
+        <strong id="transcript">请先说“开始”</strong>
+      </article>
+      <article class="status-card wide">
+        <span>规划摘要</span>
+        <strong id="planSummary">等待你说“开始”</strong>
+      </article>
+      <article class="status-card compact">
+        <span>交互模式</span>
+        <strong id="interactionMode">绘图 V1</strong>
+      </article>
+      <article class="status-card compact">
+        <span>执行路径</span>
+        <strong id="routeBadge">待判断</strong>
+      </article>
+      <article class="status-card compact countdown-card">
+        <span>静默倒计时</span>
+        <strong id="silenceCountdown">—</strong>
+        <div class="countdown-track"><span id="countdownFill"></span></div>
+      </article>
+      <article class="status-card compact">
+        <span>端到端响应</span>
+        <strong id="latency">—</strong>
+      </article>
+      <article class="status-card compact">
+        <span>识别置信度</span>
+        <strong id="asrConfidence">—</strong>
+      </article>
+      <article class="status-card compact">
+        <span>系统自检</span>
+        <strong id="preflightStatus">检测中</strong>
+      </article>
+      <article class="status-card wide">
+        <span>已记录的绘画描述</span>
+        <strong id="promptBuffer">尚未开始记录</strong>
+      </article>
+      <article class="status-card compact">
+        <span>场景对象</span>
+        <strong id="sceneInfo">当前 0 个图元，0 个语义对象</strong>
+      </article>
+    </section>
+
+    <section class="workspace">
+      <div class="canvas-panel">
+        <div class="canvas-toolbar">
+          <div class="toolbar-title">
+            <strong>实时可中断画布</strong>
+            <span>语音描述 → 自动拆解 → 逐步执行；说“停止”会回滚本次未完成任务</span>
+          </div>
+          <div class="toolbar-progress">
+            <div class="progress-bar"><span id="progressFill"></span></div>
+            <small id="progressText">等待任务</small>
+          </div>
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="drawingCanvas" width="1000" height="700"></canvas>
+          <div class="thinking hidden" id="thinking">
+            <div class="spinner"></div>
+            <p class="thinking-title" id="thinkingTitle">AI 正在构图并编译绘图指令…</p>
+            <p class="thinking-note" id="thinkingNote">你可以直接说“停止”来取消并回滚本次绘制。</p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="side-panel">
+        <section class="panel-section featured-section">
+          <h2>评委推荐演示</h2>
+          <p>说：“开始，画一幅夜晚海边，月亮倒映在海面，远处有灯塔和三只海鸥。”停顿 3 秒后自动绘制；再说：“开始，把月亮向右移动八十像素，然后变成金色。”展示复杂生成与本地低延迟编辑。最后说：“进入交流模式”，再说“开始，帮我总结这幅画的亮点”，展示语音交流模型 V2。</p>
+          <div class="chip-group">
+            <span class="chip chip-start">开始</span>
+            <span class="chip">自然描述</span>
+            <span class="chip chip-finish">静默 3 秒</span>
+            <span class="chip chip-fast">本地快速编辑</span>
+            <span class="chip chip-stop">停止</span>
+          </div>
+        </section>
+
+        <section class="panel-section">
+          <h2>方案拆解</h2>
+          <ol class="plan-steps" id="planSteps">
+            <li>等待语音任务</li>
+          </ol>
+          <p class="route-reason" id="routeReason">系统会自动选择本地快速通道或 AI 复杂规划通道。</p>
+        </section>
+
+        <section class="panel-section">
+          <h2>纯语音控制</h2>
+          <div class="chip-group small">
+            <span class="chip">撤销</span><span class="chip">重做</span>
+            <span class="chip">清空画布</span><span class="chip">保存图片</span>
+            <span class="chip">保存作品</span><span class="chip">打开上次作品</span>
+            <span class="chip">重复上次描述</span><span class="chip">朗读状态</span>
+            <span class="chip">语音帮助</span><span class="chip">系统自检</span>
+            <span class="chip">恢复现场</span><span class="chip">立即绘图</span>
+            <span class="chip">进入交流模式</span><span class="chip">退出交流模式</span>
+            <span class="chip chip-stop">停止</span>
+          </div>
+        </section>
+
+        <section class="panel-section">
+          <h2>任务日志</h2>
+          <ul class="activity-log" id="activityLog">
+            <li class="log-item info">系统启动，正在初始化语音与 VAD…</li>
+          </ul>
+        </section>
+
+        <section class="panel-section">
+          <details id="debugDetails">
+            <summary>查看结构化 Drawing DSL</summary>
+            <pre id="dslOutput">暂无</pre>
+          </details>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <div class="permission-overlay hidden" id="permissionOverlay">
+    <div class="permission-card">
+      <h2>需要一次麦克风授权</h2>
+      <p>浏览器安全策略通常要求首次授权。授权完成后，绘图创作、编辑、中断、保存和恢复都可仅通过语音完成。</p>
+      <button id="permissionButton">授权麦克风，进入纯语音模式</button>
+      <small>比赛现场可使用 scripts/start_competition_kiosk.bat 启动评委免登录演示模式。</small>
+    </div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

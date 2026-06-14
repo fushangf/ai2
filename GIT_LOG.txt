@@ -1,0 +1,9 @@
+e9db437 (HEAD -> master) fix: synchronize MySQL credentials and isolate legacy data volume
+342201f (origin/master, origin/HEAD) chore: remove obsolete release artifacts
+1fdd097 docs: clarify backward-compatible application route
+2afe738 fix: update competition launchers to the workspace route
+5174482 docs: document multi-page authentication architecture
+2133854 feat: redesign administrator console with separated views
+2e56f0f feat: add landing page tabbed login and separate registration
+5c080ea feat: separate product routes and enforce role-specific login
+8748cf1 chore: import competition edition v4.2 baseline

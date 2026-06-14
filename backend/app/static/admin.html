@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>管理后台 · AI Voice Draw</title><link rel="stylesheet" href="/static/style.css" /></head>
+<body class="admin-app-body">
+  <aside class="admin-sidebar">
+    <a class="brand-lockup admin-brand" href="/"><span class="brand-mark"><i></i></span><span><strong>AI Voice Draw</strong><small>Admin Console</small></span></a>
+    <nav class="admin-nav" aria-label="后台导航">
+      <button class="admin-nav-item active" data-view="overview"><span>▦</span>总览</button>
+      <button class="admin-nav-item" data-view="users"><span>◉</span>用户管理</button>
+      <button class="admin-nav-item" data-view="analytics"><span>⌁</span>使用统计</button>
+      <button class="admin-nav-item" data-view="system"><span>◇</span>系统状态</button>
+    </nav>
+    <div class="admin-sidebar-bottom"><a href="/workspace">打开绘图工作台</a><button id="logoutButton">退出登录</button></div>
+  </aside>
+
+  <main class="admin-main">
+    <header class="admin-header"><div><p class="eyebrow">ADMIN DASHBOARD</p><h1 id="adminPageTitle">平台运行总览</h1><p id="adminPageSubtitle">实时查看用户、调用、性能和系统运行情况</p></div><div class="admin-profile"><span class="profile-avatar">A</span><div><strong id="adminIdentity">当前管理员</strong><small>平台管理员</small></div></div></header>
+
+    <section class="admin-view active" data-view-panel="overview">
+      <div class="admin-summary-grid competition-admin-grid">
+        <article class="status-card metric-card"><span>总用户数</span><strong id="totalUsers">0</strong><small>平台注册账号</small></article>
+        <article class="status-card metric-card"><span>今日请求</span><strong id="todayUsageCount">0</strong><small>今日语音任务</small></article>
+        <article class="status-card metric-card"><span>累计使用</span><strong id="totalUsageCount">0</strong><small>历史调用总量</small></article>
+        <article class="status-card metric-card"><span>成功率</span><strong id="successRate">0%</strong><small>任务执行成功</small></article>
+        <article class="status-card metric-card"><span>平均延迟</span><strong id="averageLatency">0 ms</strong><small>端到端规划耗时</small></article>
+        <article class="status-card metric-card"><span>保存作品</span><strong id="totalArtworks">0</strong><small>用户作品数量</small></article>
+        <article class="status-card hidden-metric"><span>管理员数</span><strong id="adminUsers">0</strong></article>
+        <article class="status-card hidden-metric"><span>封禁用户</span><strong id="bannedUsers">0</strong></article>
+        <article class="status-card hidden-metric"><span>路由统计</span><strong id="routeCounts">0 / 0 / 0 / 0</strong></article>
+      </div>
+      <div class="admin-dashboard-grid">
+        <section class="admin-panel"><div class="admin-panel-title"><div><h2>执行路径分布</h2><p>本地、AI、缓存和语音 V2 的任务占比</p></div></div><div class="route-bars" id="routeBars"><div><span>本地路由</span><i><b id="localRouteBar"></b></i><em id="localRouteValue">0</em></div><div><span>AI 规划</span><i><b id="aiRouteBar"></b></i><em id="aiRouteValue">0</em></div><div><span>方案缓存</span><i><b id="cacheRouteBar"></b></i><em id="cacheRouteValue">0</em></div><div><span>语音 V2</span><i><b id="voiceRouteBar"></b></i><em id="voiceRouteValue">0</em></div></div></section>
+        <section class="admin-panel"><div class="admin-panel-title"><div><h2>最近调用</h2><p>最新语音任务和执行状态</p></div></div><ul class="activity-log dashboard-log" id="logsList"></ul></section>
+      </div>
+    </section>
+
+    <section class="admin-view" data-view-panel="users">
+      <section class="admin-panel"><div class="admin-panel-title"><div><h2>用户账号管理</h2><p>查看用户状态、使用次数，并执行封禁或解除封禁</p></div><div class="admin-table-tools"><input id="userSearch" placeholder="搜索用户名或邮箱" /><span id="adminMessage" class="form-message">正在加载数据...</span></div></div><div class="table-wrap"><table class="admin-table"><thead><tr><th>ID</th><th>用户名</th><th>邮箱</th><th>角色</th><th>使用次数</th><th>状态</th><th>最近使用</th><th>注册时间</th><th>操作</th></tr></thead><tbody id="usersTableBody"></tbody></table></div></section>
+    </section>
+
+    <section class="admin-view" data-view-panel="analytics">
+      <div class="analytics-grid"><article class="admin-panel"><h2>账号结构</h2><div class="donut-wrap"><div class="css-donut" id="userDonut"><span id="normalUserCount">0</span></div><div class="donut-legend"><span><i class="normal"></i>正常用户 <b id="normalUserLegend">0</b></span><span><i class="banned"></i>封禁用户 <b id="bannedUserLegend">0</b></span><span><i class="admin"></i>管理员 <b id="adminUserLegend">0</b></span></div></div></article><article class="admin-panel"><h2>平台说明</h2><div class="system-list"><div><span>统计口径</span><b>UsageLog 数据表</b></div><div><span>用户数据</span><b>MySQL / SQLite</b></div><div><span>MySQL 宿主机端口</span><b>3307</b></div><div><span>安全策略</span><b>JWT + PBKDF2 + 角色校验</b></div></div></article></div>
+    </section>
+
+    <section class="admin-view" data-view-panel="system">
+      <div class="system-grid"><article class="admin-panel"><h2>服务健康状态</h2><div class="system-list" id="systemHealth"><div><span>后端服务</span><b>检测中</b></div></div></article><article class="admin-panel"><h2>架构信息</h2><div class="system-list"><div><span>语音结束策略</span><b>VAD 静默 3 秒</b></div><div><span>执行架构</span><b>Local / Cache / AI → DSL</b></div><div><span>数据库端口</span><b>3307 → 3306</b></div><div><span>版本</span><b>4.3.1</b></div></div></article></div>
+    </section>
+  </main>
+  <script src="/static/admin.js"></script>
+</body></html>

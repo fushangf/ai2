@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>登录 · AI Voice Draw</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body class="portal-body">
+  <a class="portal-brand" href="/"><span class="brand-mark"><i></i></span><span><strong>AI Voice Draw</strong><small>纯语音智能绘图</small></span></a>
+  <main class="portal-shell">
+    <section class="portal-visual">
+      <div class="portal-visual-content">
+        <span class="product-pill"><i></i> VOICE CREATION PLATFORM</span>
+        <h1>登录后，<br />让声音变成画面。</h1>
+        <p>AI 理解自然语言，自动拆解复杂指令，并通过安全 Drawing DSL 在画布上逐步执行。</p>
+        <div class="visual-feature-list"><span><b>01</b> 三秒静默自动提交</span><span><b>02</b> 毫秒级本地编辑</span><span><b>03</b> 中断、回滚与恢复</span></div>
+      </div>
+      <div class="portal-art"><div class="orbit one"></div><div class="orbit two"></div><div class="voice-core"><span></span></div></div>
+    </section>
+
+    <section class="portal-card">
+      <div class="portal-card-header"><span>WELCOME BACK</span><h2 id="portalTitle">登录创作空间</h2><p id="portalSubtitle">使用普通用户账号进入语音绘图工作台</p></div>
+      <div class="role-tabs" role="tablist" aria-label="登录角色">
+        <button class="role-tab active" type="button" data-role="user" role="tab" aria-selected="true"><span>◉</span>用户登录</button>
+        <button class="role-tab" type="button" data-role="admin" role="tab" aria-selected="false"><span>▦</span>管理员登录</button>
+      </div>
+
+      <form id="loginForm" class="modern-form" autocomplete="on">
+        <input type="hidden" id="loginRole" value="user" />
+        <label><span>账号</span><div class="input-shell"><i>＠</i><input name="username" autocomplete="username" placeholder="用户名或邮箱" minlength="3" required /></div></label>
+        <label><span>密码</span><div class="input-shell"><i>⌁</i><input id="loginPassword" type="password" name="password" autocomplete="current-password" placeholder="请输入登录密码" minlength="8" required /><button class="password-toggle" type="button" data-target="loginPassword" aria-label="显示或隐藏密码">显示</button></div></label>
+        <div class="form-options"><label class="check-label"><input type="checkbox" id="rememberAccount" /> <span>记住账号</span></label><a href="#" id="helpLink">登录遇到问题？</a></div>
+        <button class="submit-button" type="submit"><span id="submitText">进入语音工作台</span><b>→</b></button>
+        <p id="loginMessage" class="form-message" role="status"></p>
+      </form>
+
+      <div id="userRegisterHint" class="portal-switch">还没有账号？<a href="/register">创建新账号</a></div>
+      <div id="adminSecurityHint" class="security-hint hidden"><b>安全提示</b><span>管理员入口采用角色校验，普通用户账号无法进入管理后台。</span></div>
+      <div class="portal-divider"><span>平台能力</span></div>
+      <div class="mini-capabilities"><span>Voice VAD</span><span>AI Planner</span><span>Safe DSL</span><span>MySQL</span></div>
+    </section>
+  </main>
+  <script src="/static/auth.js"></script>
+</body>
+</html>
