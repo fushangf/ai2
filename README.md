@@ -1,6 +1,7 @@
 # AI 纯语音绘图工具 · 增强版 4.3.1
 
 面向“题目二：AI 语音绘图工具”的完整参赛工程。完成首次浏览器麦克风授权后，用户可仅通过语音完成创作、编辑、中断、撤销、保存、恢复和系统自检。
+演示:https://www.bilibili.com/video/BV1EfJc6nE3p/?pop_share=1&spm_id_from=333.40164.0.0&vd_source=d0eeececdd21534dbeb2c23330b1203a
 
 ## 竞赛亮点
 
